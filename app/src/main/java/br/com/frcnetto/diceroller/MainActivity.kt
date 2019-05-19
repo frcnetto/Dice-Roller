@@ -1,10 +1,8 @@
 package br.com.frcnetto.diceroller
 
-import android.support.v7.app.AppCompatActivity
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -14,21 +12,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnRoll.setOnClickListener {
-            rollDice()
-        }
-
+        dice.setOnClickListener { rollDice() }
     }
 
     private fun rollDice() {
-        when((Random().nextInt(6) + 1)){
-            1    -> dice.setImageResource(R.drawable.dice_1)
-            2    -> dice.setImageResource(R.drawable.dice_2)
-            3    -> dice.setImageResource(R.drawable.dice_3)
-            4    -> dice.setImageResource(R.drawable.dice_4)
-            5    -> dice.setImageResource(R.drawable.dice_5)
-            6    -> dice.setImageResource(R.drawable.dice_6)
-            else -> dice.setImageResource(R.drawable.empty_dice)
+        dice.setImageDrawable(returnDiceFaceByNumber(Random().nextInt(6) + 1))
+    }
+
+    private fun returnDiceFaceByNumber(face: Int): Drawable {
+        return when(face){
+            1    -> resources.getDrawable(R.drawable.dice_1)
+            2    -> resources.getDrawable(R.drawable.dice_2)
+            3    -> resources.getDrawable(R.drawable.dice_3)
+            4    -> resources.getDrawable(R.drawable.dice_4)
+            5    -> resources.getDrawable(R.drawable.dice_5)
+            6    -> resources.getDrawable(R.drawable.dice_6)
+            else -> resources.getDrawable(R.drawable.empty_dice)
         }
     }
 }
